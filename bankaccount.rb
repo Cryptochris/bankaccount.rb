@@ -21,15 +21,14 @@ class BankAccount
   end
 
   def balance
-    balance = 0.0
-    @transactions.each do |transaction|
-      balance += transaction[:amount]
+    @transactions.reduce(0) do |memo, transaction|
+      memo + transaction[:amount]
     end
-    return balance
   end
 
   def to_s
-    "Name: #{name}, Balance: #{sprintf("%0.2f", balance)}"
+    my_string = "Name: %s, Balance: %0.2f"
+    sprintf(my_string, name, balance)
   end
 
   def print_register
